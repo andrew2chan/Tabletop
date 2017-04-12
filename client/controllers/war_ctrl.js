@@ -90,6 +90,8 @@ app.controller('warCardGameController', function($scope, userInfo, $location, lo
 
   });
 
+  //Create an AudioListener and add it to the camera
+
 
     function loadDeck(callback){
       return new Promise(function(resolve, reject){
@@ -142,7 +144,7 @@ app.controller('warCardGameController', function($scope, userInfo, $location, lo
 		renderer = new THREE.WebGLRenderer();
 		renderer.setSize( window.innerWidth, window.innerHeight );
     document.getElementById("war").appendChild( renderer.domElement );
-
+      callSound2();
     //function that allows the screen to be resized.
     window.addEventListener( 'resize', onWindowResize, false );
     function onWindowResize(){
@@ -322,6 +324,24 @@ app.controller('warCardGameController', function($scope, userInfo, $location, lo
     sound.play();
   }
 
+  function callSound2(){
+    var listener2 = new THREE.AudioListener();
+    camera.add( listener2 );
+
+    // create a global audio source
+    var sound2 = new THREE.Audio( listener2 );
+
+    var audioLoader2 = new THREE.AudioLoader();
+
+    //Load a sound and set it as the Audio object's buffer
+    audioLoader2.load( 'sounds/ambiancecut.wav', function( buffer ) {
+      sound2.setBuffer( buffer );
+      sound2.setLoop(true);
+      sound2.setVolume(0.5);
+      sound2.play();
+    });
+
+  }
   /*********************************
   *       USER MOUSE Clicking
   *********************************/
@@ -338,6 +358,7 @@ app.controller('warCardGameController', function($scope, userInfo, $location, lo
     });
 
     function checkforObject() {
+
       if(gameWon) return;
       // update the picking ray with the camera and mouse position
       raycaster.setFromCamera( mouse, camera );
