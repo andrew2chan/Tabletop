@@ -21,6 +21,3 @@ Try putting <code>sudo npm install</code> and <code>sudo npm start</code>
 # Testing new code<br>
 To test new code, simply stop the program using Ctrl+C. Then retype:
 <code>npm start</code>
-<br>
-# Heroku Application<br>
-This is the <a href="https://tabletop-games.herokuapp.com/#/">demo</a> link for our website.
